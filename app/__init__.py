@@ -1,4 +1,3 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -24,9 +23,11 @@ def create_app(config_class=Config):
     mail.init_app(app)
     from app.posts.routes import posts
     from app.main.routes import main
+    from app.errors.handlers import errors
     from app.users.routes import users
     app.register_blueprint(users)
     app.register_blueprint(posts)
+    app.register_blueprint(errors)
     app.register_blueprint(main)
 
     return app
